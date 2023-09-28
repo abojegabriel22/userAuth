@@ -1,10 +1,25 @@
 const express = require('express');
 const app = express();
 const bcrypt = require("bcrypt");
+const port = 1000;
+const {MongoClient} = require('mongodb');
+const mongoUrl = "mongodb+srv://userauthenticate:EbHB1nrm17K6tdg7@cluster0.16ffmn9.mongodb.net/?retryWrites=true&w=majority";
+// const mongoUrl = "mongodb://127.0.0.1:27017";
+const client = new MongoClient(mongoUrl, {useNewUrlParser:true,useUnifiedTopology:true});
+// const mongo = require('mongodb');
+
+client.connect((err)=>{
+    if(err){
+        console.error(err);
+        return;
+    }
+    console.log("connected to mongodb database");
+})
 
 app.use(express.json())
 
-const users = []
+// const users = []
+const users = client.db("userauth").collection("users");
 
 app.get('/users', (req, res) => {
     res.json(users)
@@ -37,4 +52,16 @@ app.post('/users/login', async (req, res) => {
     }
 })
 
-app.listen(1000);
+app.listen(port, (err)=>{
+    dbConnect()
+    if (err) throw err;
+    console.log(`server is running on port ${port}`)
+});
+
+
+// db.users.insert({"name":"Aboje Gabriel"})
+// db.users.insert({"name":"James Moses"})
+
+// database password: EbHB1nrm17K6tdg7 
+
+// mongodb+srv://userauthenticate:EbHB1nrm17K6tdg7@cluster0.16ffmn9.mongodb.net/?retryWrites=true&w=majority
