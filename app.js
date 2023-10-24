@@ -3,8 +3,8 @@ const app = express();
 const bcrypt = require("bcrypt");
 const port = 1000;
 const {MongoClient} = require('mongodb');
-const mongoUrl = "mongodb+srv://userauthenticate:EbHB1nrm17K6tdg7@cluster0.16ffmn9.mongodb.net/?retryWrites=true&w=majority";
-// const mongoUrl = "mongodb://127.0.0.1:27017";
+// const mongoUrl = "mongodb+srv://userauthenticate:EbHB1nrm17K6tdg7@cluster0.16ffmn9.mongodb.net/?retryWrites=true&w=majority";
+const mongoUrl = "mongodb://127.0.0.1:27017";
 const client = new MongoClient(mongoUrl, {useNewUrlParser:true,useUnifiedTopology:true});
 // const mongo = require('mongodb');
 
